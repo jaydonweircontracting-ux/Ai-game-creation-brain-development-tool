@@ -34,6 +34,15 @@ Staging dir assembled 2026-10-13 from https://github.com/jaydonweircontracting-u
 | `simLod.ts` | Simulation LOD tiers | none |
 | `persistence.ts` | Save-schema helpers + `migrateSave()` | `worldCore.ts` |
 | `mapBuilder.ts` | Pure tilemap paint helpers (editor tooling) | none |
+| `hash.ts` | Deterministic seeded integer hash (from townsfolkHash) | none |
+| `wfc.ts` | Wave Function Collapse core engine (zero imports) | none |
+| `wfcDungeon.ts` | WFC dungeon tile set + generator | `wfc.ts` |
+| `wfcInfra.ts` | WFC infrastructure tile set | `wfc.ts` |
+| `wfcTown.ts` | WFC town tile set + generator | `wfc.ts` |
+| `wfcWorld.ts` | WFC world/region tile set + generator | `wfc.ts` |
+| `stoneSoupEngine.ts` | Turn-based roguelike dungeon-crawler rules engine (zero imports; pass explicit seed) | none |
+| `civilization.ts` | Clock-driven civ sim — ADAPTER: replace game world-data tables | `worldCore.ts`, `hash.ts` |
+| `travelers.ts` | Analytic road travel — ADAPTER: pass your own landmarks | `worldCore.ts`, `hash.ts` |
 
 ## scripts/ — TOOL
 
