@@ -1,0 +1,61 @@
+<!--
+Extracted from: https://github.com/jaydonweircontracting-ux/Adventure-game-
+Origin path: project-memory/CURRENT_STATE.md
+Extraction date: 2026-10-13
+Purpose: Session-continuity state file pattern.
+-->
+
+# Current Project State
+
+**Last updated:** 2026-10-12 (BUILD 634)
+**Latest verified build:** 633 (66eec15) — confirmed live via curl
+**Git HEAD:** 66eec15 (main)
+
+## What this game is
+Large grid-based, chunk-based open-world adventure RPG. 2.5D isometric is default.
+Deploys via GitHub Pages. Build marker `window.__AG_BUILD` injected by `scripts/prepare-build-entry.cjs`.
+
+## Architecture (non-negotiable)
+- Preserve: grid, chunks, coordinates, 2.5D renderer, collision, world gen, NPCs, quests, combat, inventory, interiors, saves
+- No rewrites, no second coordinate system, no duplicate architecture
+- No server — GitHub Pages static hosting only
+- `src/App.tsx` (~10k lines): GameField component holds all gameplay state
+- `src/game/`: 46 modules for world, entities, systems
+- `src/game/iso/`: 2.5D renderer
+
+## Recent changes
+- BUILD 634: Backoff on update check failures, deployment verification tests
+- BUILD 633: Real-time update banner (10s poll)
+- BUILD 632: Save button in main menu
+- BUILD 631: Tri-color update banner
+- BUILD 630: Update checker + deployment guard script
+
+## Deployment status
+- Live: BUILD 633 (verified 2026-10-12 via curl)
+- Pushed: BUILD 633 (66eec15)
+- Deployed: BUILD 633 (Actions succeeded)
+- Verified: YES — live build matches expected
+
+## Unresolved issues
+- ISSUE-005: Townsfolk test failures pre-existing from BUILD 548
+- ISSUE-006: Player exits from back of house (unverified)
+
+## Resolved
+- ISSUE-004: GitHub Pages deployment stuck — RESOLVED (deployments now propagating normally)
+
+## Next recommended tasks
+1. Verify BUILD 633 HUD on phone
+2. Investigate ISSUE-006 (exit position)
+
+## How to run tests
+```bash
+npx tsx scripts/simulate.ts  # 41k+ assertions
+npx tsc --noEmit             # 2 known baseline errors (TS1355, TS2367)
+npm run build                # production build
+./scripts/check-deployment.sh [build]  # verify live deployment
+```
+
+## Detailed records
+- `project-memory/ISSUES.json` — issue tracker
+- `project-memory/BUILD_HISTORY.json` — build log
+- `project-memory/CURRENT_STATE.md` — this file
